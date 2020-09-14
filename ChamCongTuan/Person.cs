@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,13 @@ namespace ChamCongTuan
 {
     class Person
     {
-        public String Ten {get; set;}
-        public String CongTrinh { get; set; }
         public String MaNhanVien { get; set; }
-        public String ViTri  { get; set; }
-        public String Name { get; set; }
-        public DateTime NgaySinh { get; set; }
-        public int SDT { get; set; }
+        public String HoTen { get; set; }
+        public String NgaySinh { get; set; }
+        public String PhongBan { get; set; }
+        public String ViTri { get; set; }
+        public String SDT { get; set; }
+        public Hashtable ChamCong = new Hashtable();
 
 
     }
