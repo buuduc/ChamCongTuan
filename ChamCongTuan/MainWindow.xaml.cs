@@ -31,7 +31,6 @@ namespace ChamCongTuan
         private void NhapHoSoBtn(object sender, RoutedEventArgs e)
         {
 
-            List<Person> PersonList = new List<Person>();
             try
             {
                 // mở file excel
@@ -97,8 +96,13 @@ namespace ChamCongTuan
                     try
                     {
                         for (int index = 1; index <= 31; index++)
+                        //while(Int32)
                         {
-                            person.ChamCong.Add(workSheet.Cells[2, index + 4].Value, workSheet.Cells[i, index + 4].Value);
+                            if (workSheet.Cells[i, index + 4].Value != null)
+                            {
+                                person.ChamCong.Add(workSheet.Cells[2, index + 4].Value, workSheet.Cells[i, index + 4].Value);
+
+                            }
                         }
                     }
                     catch (Exception exe)
@@ -121,8 +125,10 @@ namespace ChamCongTuan
             //var a= this.ListPerson.Find(ps => ps.MaNhanVien == "DH0134");
             //a.ChamCong.Add("ff", "ff");
             //MessageBox.Show(a.ChamCong["ff"].ToString());
-            Hashtable ChamCong = new Hashtable();
+            //Hashtable ChamCong = new Hashtable();
             //ChamCong.Add("gg", );
+            Person ps = this.ListPerson[0];
+            MessageBox.Show(ps.CongHanhChinh().ToString());
         }
     }
 }
