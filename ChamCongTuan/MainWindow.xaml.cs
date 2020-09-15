@@ -88,21 +88,22 @@ namespace ChamCongTuan
                 // lấy ra sheet đầu tiên để thao tác
                 ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
                 //workSheet.Cells[4, 1].Value.ToString();
-
-                //
+               
                 for (int i = workSheet.Dimension.Start.Row + 2; i <= workSheet.Dimension.End.Row; i++)
                 {
                     Person person = this.ListPerson.Find(ps => ps.MaNhanVien == workSheet.Cells[i, 1].Value.ToString());
                     try
                     {
-                        for (int index = 1; index <= 31; index++)
-                        //while(Int32)
+                        //for (int index = 1; index <= 31; index++)
+                        int index = 1;
+                        while(workSheet.Cells[2, index + 4].Value.ToString()[2]=='/')
                         {
                             if (workSheet.Cells[i, index + 4].Value != null)
                             {
                                 person.ChamCong.Add(workSheet.Cells[2, index + 4].Value, workSheet.Cells[i, index + 4].Value);
 
                             }
+                            index++;
                         }
                     }
                     catch (Exception exe)
@@ -127,8 +128,31 @@ namespace ChamCongTuan
             //MessageBox.Show(a.ChamCong["ff"].ToString());
             //Hashtable ChamCong = new Hashtable();
             //ChamCong.Add("gg", );
-            Person ps = this.ListPerson[0];
-            MessageBox.Show(ps.CongHanhChinh().ToString());
+            Person ps = this.ListPerson[59];
+            ps.TinhCong();
+            //MessageBox.Show(ps.TinhComg().ToString());
+        }
+        private Stream CreateExcelFile(Stream stream = null)
+        {
+            var list = CreateTestItems();
+            using (var excelPackage = new ExcelPackage(stream ?? new MemoryStream()))
+            {
+                // Tạo author cho file Excel
+                excelPackage.Workbook.Properties.Author = "Hanker";
+                // Tạo title cho file Excel
+                excelPackage.Workbook.Properties.Title = "EPP test background";
+                // thêm tí comments vào làm màu 
+                excelPackage.Workbook.Properties.Comments = "This is my fucking generated Comments";
+                // Add Sheet vào file Excel
+                excelPackage.Workbook.Worksheets.Add("First Sheet");
+                // Lấy Sheet bạn vừa mới tạo ra để thao tác 
+                var workSheet = excelPackage.Workbook.Worksheets[1];
+                // Đổ data vào Excel file
+                workSheet.Cells[1, 1].LoadFromCollection(list, true, TableStyles.Dark9);
+                // BindingFormatForExcel(workSheet, list);
+                excelPackage.Save();
+                return excelPackage.Stream;
+            }
         }
     }
 }
