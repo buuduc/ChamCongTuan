@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Table;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace ChamCongTuan
             InitializeComponent();
         }
         private List<Person> ListPerson = new List<Person>();
+        private List<String> CongTaclst = new List<String>();
+
         private void NhapHoSoBtn(object sender, RoutedEventArgs e)
         {
 
@@ -38,12 +41,13 @@ namespace ChamCongTuan
 
                 // lấy ra sheet đầu tiên để thao tác
                 ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
-                List<Person> ListPerson = new List<Person>();
+               
                 // duyệt tuần tự từ dòng thứ 2 đến dòng cuối cùng của file. lưu ý file excel bắt đầu từ số 1 không phải số 0
                 for (int i = workSheet.Dimension.Start.Row + 2; i <= workSheet.Dimension.End.Row; i++)
                 {
                     try
                     {
+                        
                         // biến j biểu thị cho một column trong file
                         int j = 1;
 
@@ -56,6 +60,7 @@ namespace ChamCongTuan
                         Person person = new Person();
                         person.MaNhanVien = workSheet.Cells[i, j++].Value.ToString();
                         person.HoTen = workSheet.Cells[i, j++].Value.ToString();
+                        CongTaclst.Add(workSheet.Cells[i, j].Value.ToString());
                         person.PhongBan = workSheet.Cells[i, j++].Value.ToString();
                         person.ViTri = workSheet.Cells[i, j++].Value.ToString();
                         person.NgaySinh = workSheet.Cells[i, j++].Value.ToString();
@@ -69,7 +74,7 @@ namespace ChamCongTuan
                 }
                 Datagrid.ItemsSource = ListPerson;
                 this.ListPerson = ListPerson;
-                
+                CongTaclst = CongTaclst.Distinct().ToList();
             }
             catch (Exception ee)
             {
@@ -121,6 +126,7 @@ namespace ChamCongTuan
 
         }
 
+
         private void ExportDataBtn(object sender, RoutedEventArgs e)
         {
             //var a= this.ListPerson.Find(ps => ps.MaNhanVien == "DH0134");
@@ -130,11 +136,12 @@ namespace ChamCongTuan
             //ChamCong.Add("gg", );
             Person ps = this.ListPerson[59];
             ps.TinhCong();
+            CreateExcelFile();
             //MessageBox.Show(ps.TinhComg().ToString());
         }
         private Stream CreateExcelFile(Stream stream = null)
         {
-            var list = CreateTestItems();
+            
             using (var excelPackage = new ExcelPackage(stream ?? new MemoryStream()))
             {
                 // Tạo author cho file Excel
@@ -146,9 +153,9 @@ namespace ChamCongTuan
                 // Add Sheet vào file Excel
                 excelPackage.Workbook.Worksheets.Add("First Sheet");
                 // Lấy Sheet bạn vừa mới tạo ra để thao tác 
-                var workSheet = excelPackage.Workbook.Worksheets[1];
+                var workSheet = excelPackage.Workbook.Worksheets[0];
                 // Đổ data vào Excel file
-                workSheet.Cells[1, 1].LoadFromCollection(list, true, TableStyles.Dark9);
+                workSheet.Cells[1, 1].LoadFromCollection(ListPerson, true, TableStyles.Dark9);
                 // BindingFormatForExcel(workSheet, list);
                 excelPackage.Save();
                 return excelPackage.Stream;
