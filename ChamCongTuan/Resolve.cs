@@ -1,6 +1,8 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -52,7 +54,6 @@ namespace ChamCongTuan
             //}
 
 
-
             HeaderRow(i++);
             foreach (Person ps in listPerson)
             {
@@ -66,15 +67,24 @@ namespace ChamCongTuan
         {
             
             int j = 1;
-            
+            Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.MaNhanVien;
+            Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.HoTen;
+            Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.NgaySinh;
+            Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.PhongBan;
             var a = new DateTime(2020, 8, 30);
             for (DateTime date = new DateTime(2020,8,1); a.CompareTo(date) >=0; date = date.AddDays(1.0))
             {
                 ps.TinhCong();
+
+                if (date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+                }
                 Worksheet.Cells[row, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
             }
@@ -86,13 +96,20 @@ namespace ChamCongTuan
         {
             int j = 1;
             Worksheet.Cells[row, j++].Value = "Mã Nhân Viên";
-            Worksheet.Cells[row, j++].Value = "Ho Tên";
-            Worksheet.Cells[row, j++].Value = "Ngày sinh";
+            Worksheet.Cells[row, j++].Value = "Họ Tên";
+            Worksheet.Cells[row, j++].Value = "Ngày Sinh";
             Worksheet.Cells[row, j++].Value = "Phòng ban";
             var a = new DateTime(2020, 8, 30);
             for (DateTime date = new DateTime(2020, 8, 1); a.CompareTo(date) >= 0; date = date.AddDays(1.0))
             {
-                string strday = date.DayOfWeek.ToString()+ "/n"+ date.Day.ToString() + "/" + date.Month.ToString();
+                string strday = date.DayOfWeek.ToString()+ "\n"+ date.Day.ToString() + "/" + date.Month.ToString();
+                Worksheet.Cells[row,j].Style.WrapText = true;
+                Worksheet.Column(j).Width = 11.5;
+                if (date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+                }
                 Worksheet.Cells[row, j++].Value = strday;
                 //Worksheet.Cells[1, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
