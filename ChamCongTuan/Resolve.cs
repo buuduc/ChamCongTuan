@@ -35,36 +35,38 @@ namespace ChamCongTuan
         {
             int i = 1;
             //Person ps = this.listPerson[59];
-            //Worksheet.Cells[2, 1].LoadFromArrays(ps.PubSalaryHours);
 
-            int j = 1;
-            Worksheet.Cells[i, j++].Value = "Mã Nhân Viên";
-            Worksheet.Cells[i, j++].Value = "Ho Tên";
-            Worksheet.Cells[i, j++].Value = "Ngày sinh";
-            Worksheet.Cells[i, j++].Value = "Phòng ban";
-            var a = new DateTime(2020, 8, 30);
-            for (DateTime date = new DateTime(2020, 8, 1); a.CompareTo(date) >= 0; date = date.AddDays(1.0))
-            {
-                string strday = date.Day.ToString() + "/" + date.Month.ToString();
-                Worksheet.Cells[2, j++].Value = strday;
-                //Worksheet.Cells[1, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
-            }
+            //int j = 1;
+            //Worksheet.Cells[i, j++].Value = "Mã Nhân Viên";
+            //Worksheet.Cells[i, j++].Value = "Ho Tên";
+            //Worksheet.Cells[i, j++].Value = "Ngày sinh";
+            //Worksheet.Cells[i, j++].Value = "Phòng ban";
+            //var a = new DateTime(2020, 8, 30);
+            //for (DateTime date = new DateTime(2020, 8, 1); a.CompareTo(date) >= 0; date = date.AddDays(1.0))
+            //{
+            //    string strday = date.Day.ToString() + "/" + date.Month.ToString();
+            //    Worksheet.Cells[i, j++].Value = strday;
+            //    //Worksheet.Cells[1, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
+
+            //}
+
+
 
             HeaderRow(i++);
-            foreach ( Person ps in listPerson)
+            foreach (Person ps in listPerson)
             {
                 RowData(i++,ps);
             }
 
-           
-            
+
+
         }
         public void RowData(int row,Person ps)
         {
             
             int j = 1;
-            //Person ps = this.listPerson[59];
+            
             Worksheet.Cells[row, j++].Value = ps.MaNhanVien;
             Worksheet.Cells[row, j++].Value = ps.HoTen;
             Worksheet.Cells[row, j++].Value = ps.NgaySinh;
@@ -72,7 +74,7 @@ namespace ChamCongTuan
             var a = new DateTime(2020, 8, 30);
             for (DateTime date = new DateTime(2020,8,1); a.CompareTo(date) >=0; date = date.AddDays(1.0))
             {
-              
+                ps.TinhCong();
                 Worksheet.Cells[row, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
             }
@@ -90,8 +92,8 @@ namespace ChamCongTuan
             var a = new DateTime(2020, 8, 30);
             for (DateTime date = new DateTime(2020, 8, 1); a.CompareTo(date) >= 0; date = date.AddDays(1.0))
             {
-                string strday = date.Day.ToString() + "/" + date.Month.ToString();
-                Worksheet.Cells[2, j++].Value = strday;
+                string strday = date.DayOfWeek.ToString()+ "/n"+ date.Day.ToString() + "/" + date.Month.ToString();
+                Worksheet.Cells[row, j++].Value = strday;
                 //Worksheet.Cells[1, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
             }
