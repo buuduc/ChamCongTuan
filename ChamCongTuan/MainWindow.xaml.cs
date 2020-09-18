@@ -29,7 +29,8 @@ namespace ChamCongTuan
             InitializeComponent();
         }
         private List<Person> ListPerson = new List<Person>();
-        private List<String> CongTaclst = new List<String>();
+        private List<string> CongTaclst = new List<string>();
+        private ExcelWorksheet Worksheet;
 
         private void NhapHoSoBtn(object sender, RoutedEventArgs e)
         {
@@ -73,7 +74,6 @@ namespace ChamCongTuan
                     }
                 }
                 Datagrid.ItemsSource = ListPerson;
-                this.ListPerson = ListPerson;
                 CongTaclst = CongTaclst.Distinct().ToList();
             }
             catch (Exception ee)
@@ -134,9 +134,13 @@ namespace ChamCongTuan
             //MessageBox.Show(a.ChamCong["ff"].ToString());
             //Hashtable ChamCong = new Hashtable();
             //ChamCong.Add("gg", );
-            Person ps = this.ListPerson[59];
-            ps.TinhCong();
-            CreateExcelFile();
+
+            //Person ps = this.ListPerson[59];
+            //ps.TinhCong();
+            Resolve tt = new Resolve(ListPerson,CongTaclst);
+            
+            tt.Process();
+            tt.CreateNewFile(@"E:\OneDrive - poxz\User\ADMIN\Desktop\Tesst\test.xlsx");
             //MessageBox.Show(ps.TinhComg().ToString());
         }
         private Stream CreateExcelFile(Stream stream = null)
@@ -144,17 +148,17 @@ namespace ChamCongTuan
             
             using (var excelPackage = new ExcelPackage(stream ?? new MemoryStream()))
             {
-                // Tạo author cho file Excel
+                // Tạo author cho file Resolve
                 excelPackage.Workbook.Properties.Author = "Hanker";
-                // Tạo title cho file Excel
+                // Tạo title cho file Resolve
                 excelPackage.Workbook.Properties.Title = "EPP test background";
                 // thêm tí comments vào làm màu 
                 excelPackage.Workbook.Properties.Comments = "This is my fucking generated Comments";
-                // Add Sheet vào file Excel
+                // Add Sheet vào file Resolve
                 excelPackage.Workbook.Worksheets.Add("First Sheet");
                 // Lấy Sheet bạn vừa mới tạo ra để thao tác 
                 var workSheet = excelPackage.Workbook.Worksheets[0];
-                // Đổ data vào Excel file
+                // Đổ data vào Resolve file
                 workSheet.Cells[1, 1].LoadFromCollection(ListPerson, true, TableStyles.Dark9);
                 // BindingFormatForExcel(workSheet, list);
                 excelPackage.Save();

@@ -17,6 +17,7 @@ namespace ChamCongTuan
         public String SDT { get; set; }
         public void TinhCong()
         {
+            DeleteAll();
             double pubSalary = 0;
 
             double overSalary = 0;
@@ -92,6 +93,11 @@ namespace ChamCongTuan
                 }
             }
             //return pubSalary;
+        }
+        public void DeleteAll()
+        {
+            PubSalaryHours.Clear();
+            OverSalaryHours.Clear();
         }
         public Hashtable ChamCong = new Hashtable();
         public Hashtable PubSalaryHours = new Hashtable();
