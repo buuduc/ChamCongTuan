@@ -7,7 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
+
 
 namespace ChamCongTuan
 {
@@ -17,11 +19,12 @@ namespace ChamCongTuan
         List<String> listCongTac;
         ExcelWorksheet Worksheet;
         ExcelPackage excel = new ExcelPackage();
+        DateTime FinalDays;
         public Resolve(List<Person> ListPerson, List<String> CongTacLst)
         {
             this.listPerson = ListPerson;
             this.listCongTac = CongTacLst;
-            excel.Workbook.Worksheets.Add("Worksheet1");
+            excel.Workbook.Worksheets.Add("Công Hành Chính");
             Worksheet = excel.Workbook.Worksheets[0];
         }
 
@@ -35,32 +38,33 @@ namespace ChamCongTuan
         }
         public void Process()
         {
+            FinalDays = new DateTime(2020, 8, 31);
             int i = 1;
-            //Person ps = this.listPerson[59];
-
-
-            //int j = 1;
-            //Worksheet.Cells[i, j++].Value = "Mã Nhân Viên";
-            //Worksheet.Cells[i, j++].Value = "Ho Tên";
-            //Worksheet.Cells[i, j++].Value = "Ngày sinh";
-            //Worksheet.Cells[i, j++].Value = "Phòng ban";
-            //var a = new DateTime(2020, 8, 30);
-            //for (DateTime date = new DateTime(2020, 8, 1); a.CompareTo(date) >= 0; date = date.AddDays(1.0))
-            //{
-            //    string strday = date.Day.ToString() + "/" + date.Month.ToString();
-            //    Worksheet.Cells[i, j++].Value = strday;
-            //    //Worksheet.Cells[1, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
-
-            //}
-
-
             HeaderRow(i++);
             foreach (Person ps in listPerson)
             {
-                RowData(i++,ps);
+                RowData(i++, ps);
             }
+            var range = Worksheet.Dimension;
+            var FirstTableRange = Worksheet.Cells[Worksheet.Dimension.ToString()];
+            FirstTableRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+            FirstTableRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+            FirstTableRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            FirstTableRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
 
+
+        }
+        private void Test()
+        {
+            var ps = this.listPerson.Find(x => x.MaNhanVien == "DH0225");
+            ps.TinhCong();
+            var date = new DateTime(2020, 8, 15);
+     
+            if (ps.CheckChamCong[date].ToString() == "x")
+            {
+                MessageBox.Show("dcm nha no");
+            }
 
         }
         public void RowData(int row,Person ps)
@@ -75,8 +79,7 @@ namespace ChamCongTuan
             Worksheet.Cells[row, j++].Value = ps.NgaySinh;
             Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.PhongBan;
-            var a = new DateTime(2020, 8, 30);
-            for (DateTime date = new DateTime(2020,8,1); a.CompareTo(date) >=0; date = date.AddDays(1.0))
+            for (DateTime date = new DateTime(2020,8,1); FinalDays.CompareTo(date) >=0; date = date.AddDays(1.0))
             {
                 ps.TinhCong();
 
@@ -84,6 +87,21 @@ namespace ChamCongTuan
                 {
                     Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+                }
+                else if (ps.CheckChamCong[date] == null )
+                {
+                    Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.DarkGray;
+                    Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Gray);
+                }
+                else if( ps.CheckChamCong[date].ToString()== "x" || ps.CheckChamCong[date].ToString() == "KL" )
+                {
+                    Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Red);
+                }
+                else if (ps.CheckChamCong[date].ToString() == "Ô" || ps.CheckChamCong[date].ToString() == "P" || ps.CheckChamCong[date].ToString() == "P/2" || ps.CheckChamCong[date].ToString() == "Ô/2")
+                {
+                    Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Aqua);
                 }
                 Worksheet.Cells[row, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
@@ -99,10 +117,9 @@ namespace ChamCongTuan
             Worksheet.Cells[row, j++].Value = "Họ Tên";
             Worksheet.Cells[row, j++].Value = "Ngày Sinh";
             Worksheet.Cells[row, j++].Value = "Phòng ban";
-            var a = new DateTime(2020, 8, 30);
-            for (DateTime date = new DateTime(2020, 8, 1); a.CompareTo(date) >= 0; date = date.AddDays(1.0))
+            for (DateTime date = new DateTime(2020, 8, 1); FinalDays.CompareTo(date) >= 0; date = date.AddDays(1.0))
             {
-                string strday = date.DayOfWeek.ToString()+ "\n"+ date.Day.ToString() + "/" + date.Month.ToString();
+                string strday = date.DayOfWeek.ToString()+ "\n"+ date.Day.ToString() + "/" + date.Month.ToString()+"/"+ date.Year.ToString();
                 Worksheet.Cells[row,j].Style.WrapText = true;
                 Worksheet.Column(j).Width = 11.5;
                 if (date.DayOfWeek == DayOfWeek.Sunday)

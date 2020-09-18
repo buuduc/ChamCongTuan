@@ -25,6 +25,11 @@ namespace ChamCongTuan
             {
                 var day = C.Key.ToString();
                 DateTime date = new DateTime(2020, Int32.Parse(day.Substring(3, 2)), Int32.Parse(day.Substring(0, 2)));
+                if (C.Value != null)
+                {
+                    CheckChamCong.Add(date, C.Value.ToString());
+
+                }
                 if (date.DayOfWeek == System.DayOfWeek.Sunday)
                 {
                     if (double.TryParse(C.Value.ToString(), out double number))
@@ -67,7 +72,7 @@ namespace ChamCongTuan
                         }
                         else if(number < 0.875)
                         {
-                            if (number > 0.5)
+                            if (number >= 0.5)
                             {
                                 pubSalary+=0.5;
                                 PubSalaryHours.Add(date, 4);
@@ -98,7 +103,9 @@ namespace ChamCongTuan
         {
             PubSalaryHours.Clear();
             OverSalaryHours.Clear();
+            CheckChamCong.Clear();
         }
+        public Hashtable CheckChamCong = new Hashtable();
         public Hashtable ChamCong = new Hashtable();
         public Hashtable PubSalaryHours = new Hashtable();
         public Hashtable OverSalaryHours = new Hashtable();
