@@ -170,6 +170,8 @@ namespace ChamCongTuan
         private void ExportDataCommand()
         {
             Resolve tt = new Resolve(ListPerson, CongTaclst);
+            tt.FirstDays= new DateTime(Int32.Parse(Yearbox.Text.ToString()), Int32.Parse(FirstDayBox.Text.ToString().Substring(3, 2)), Int32.Parse(FirstDayBox.Text.ToString().Substring(0, 2)));
+            tt.FinalDays = new DateTime(Int32.Parse(Yearbox.Text.ToString()), Int32.Parse(LastDayBox.Text.ToString().Substring(3, 2)), Int32.Parse(LastDayBox.Text.ToString().Substring(0, 2)));
             tt.Process();
             tt.CreateNewFile(@"E:\OneDrive - poxz\User\ADMIN\Desktop\Tesst\test.xlsx");
 

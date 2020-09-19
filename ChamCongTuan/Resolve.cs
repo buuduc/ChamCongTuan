@@ -44,7 +44,6 @@ namespace ChamCongTuan
         }
         public void Process()
         {
-            FinalDays = new DateTime(2020, 8, 31);
 
             Worksheet = Worksheet0;
             int i = 1;
@@ -102,7 +101,8 @@ namespace ChamCongTuan
             Worksheet.Cells[row, j++].Value = ps.NgaySinh;
             Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.PhongBan;
-            for (DateTime date = new DateTime(2020,8,1); FinalDays.CompareTo(date) >=0; date = date.AddDays(1.0))
+            var firstAddress = Worksheet.Cells[row, j].Address;
+            for (DateTime date = FirstDays; FinalDays.CompareTo(date) >=0; date = date.AddDays(1.0))
             {
                 ps.TinhCong();
 
@@ -129,7 +129,9 @@ namespace ChamCongTuan
                 Worksheet.Cells[row, j++].Value = list[date];
 
             }
-        
+            var lastAddress = Worksheet.Cells[row, j-1].Address;
+            Worksheet.Cells[row, j].Formula="SUM("+ firstAddress+":"+lastAddress+")";
+
 
 
         }
@@ -140,7 +142,8 @@ namespace ChamCongTuan
             Worksheet.Cells[row, j++].Value = "Họ Tên";
             Worksheet.Cells[row, j++].Value = "Ngày Sinh";
             Worksheet.Cells[row, j++].Value = "Phòng ban";
-            for (DateTime date = new DateTime(2020, 8, 1); FinalDays.CompareTo(date) >= 0; date = date.AddDays(1.0))
+            //var firstAddress = Worksheet.Cells[row, j++].Address;
+            for (DateTime date = FirstDays; FinalDays.CompareTo(date) >= 0; date = date.AddDays(1.0))
             {
                 string strday = date.DayOfWeek.ToString()+ "\n"+ date.Day.ToString() + "/" + date.Month.ToString()+"/"+ date.Year.ToString();
                 Worksheet.Cells[row,j].Style.WrapText = true;
@@ -151,9 +154,11 @@ namespace ChamCongTuan
                     Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
                 }
                 Worksheet.Cells[row, j++].Value = strday;
-                //Worksheet.Cells[1, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
 
             }
+            Worksheet.Cells[row, j].Value = "Tổng công";
+
+
         }
     }
 }
