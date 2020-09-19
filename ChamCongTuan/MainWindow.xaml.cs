@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.Win32;
+using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System;
 using System.Collections;
@@ -31,6 +32,9 @@ namespace ChamCongTuan
         private List<Person> ListPerson = new List<Person>();
         private List<string> CongTaclst = new List<string>();
         private ExcelWorksheet Worksheet;
+        private string HoSoPath;
+        private string DuLieuPath;
+        private List<String> listDay = new List<string>();
 
         private void NhapHoSoBtn(object sender, RoutedEventArgs e)
         {
@@ -49,7 +53,7 @@ namespace ChamCongTuan
         {
 
             // mở file excel
-            var package = new ExcelPackage(new FileInfo(@"E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuan\ChamCongTuan\HoSoNhanSu.xlsx"));
+            var package = new ExcelPackage(new FileInfo(this.HoSoPath));
 
             // lấy ra sheet đầu tiên để thao tác
             ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
@@ -105,12 +109,12 @@ namespace ChamCongTuan
         private void NhapDuLieuCommand()
         {
             // mở file excel
-            var package = new ExcelPackage(new FileInfo(@"E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuan\ChamCongTuan\Bang-cham-cong-[8-2020].xlsx"));
+            var package = new ExcelPackage(new FileInfo(this.DuLieuPath));
 
             // lấy ra sheet đầu tiên để thao tác
             ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
             //workSheet.Cells[4, 1].Value.ToString();
-
+            var check = true;
             for (int i = workSheet.Dimension.Start.Row + 2; i <= workSheet.Dimension.End.Row; i++)
             {
                 Person person = this.ListPerson.Find(ps => ps.MaNhanVien == workSheet.Cells[i, 1].Value.ToString());
@@ -118,8 +122,14 @@ namespace ChamCongTuan
                 {
                     //for (int index = 1; index <= 31; index++)
                     int index = 1;
+                  
                     while (workSheet.Cells[2, index + 4].Value.ToString()[2] == '/')
                     {
+                        if (check)
+                        {
+                            listDay.Add(workSheet.Cells[2, index + 4].Value.ToString());
+                            
+                        }
                         if (workSheet.Cells[i, index + 4].Value != null)
                         {
                             person.ChamCong.Add(workSheet.Cells[2, index + 4].Value, workSheet.Cells[i, index + 4].Value);
@@ -127,6 +137,8 @@ namespace ChamCongTuan
                         }
                         index++;
                     }
+                check = false;
+
                 }
                 catch (Exception exe)
                 {
@@ -135,6 +147,9 @@ namespace ChamCongTuan
             }
             //
             Datagrid.ItemsSource = this.ListPerson;
+            FirstDayBox.ItemsSource = listDay;
+            LastDayBox.ItemsSource = listDay;
+            Yearbox.Text = DateTime.Now.Year.ToString();
         }
 
 
@@ -157,29 +172,52 @@ namespace ChamCongTuan
             Resolve tt = new Resolve(ListPerson, CongTaclst);
             tt.Process();
             tt.CreateNewFile(@"E:\OneDrive - poxz\User\ADMIN\Desktop\Tesst\test.xlsx");
+
         }
-        private Stream CreateExcelFile(Stream stream = null)
+       
+
+        private void NhapHosoBrowseBtn(object sender, RoutedEventArgs e)
         {
-            
-            using (var excelPackage = new ExcelPackage(stream ?? new MemoryStream()))
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            //openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "excel files (*.txt)|*.xlsx|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == true)
             {
-                // Tạo author cho file Resolve
-                excelPackage.Workbook.Properties.Author = "Hanker";
-                // Tạo title cho file Resolve
-                excelPackage.Workbook.Properties.Title = "EPP test background";
-                // thêm tí comments vào làm màu 
-                excelPackage.Workbook.Properties.Comments = "This is my fucking generated Comments";
-                // Add Sheet vào file Resolve
-                excelPackage.Workbook.Worksheets.Add("First Sheet");
-                // Lấy Sheet bạn vừa mới tạo ra để thao tác 
-                var workSheet = excelPackage.Workbook.Worksheets[0];
-                // Đổ data vào Resolve file
-                workSheet.Cells[1, 1].LoadFromCollection(ListPerson, true, TableStyles.Dark9);
-                // BindingFormatForExcel(workSheet, list);
-                excelPackage.Save();
-                return excelPackage.Stream;
+                //Get the path of specified file
+                this.HoSoPath = @openFileDialog.FileName;
+                NhapHoSoLabel.Foreground = Brushes.Green;
+                NhapHoSoLabel.Content = "Đã chọn !";
+
+            }
+            
+        }
+
+  
+
+        private void NhapDuLieuBrowseBtn(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            //openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "excel files (*.txt)|*.xlsx|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                //Get the path of specified file
+                this.DuLieuPath = @openFileDialog.FileName;
+                NhapDuLieuLabel.Foreground = Brushes.Green;
+                NhapDuLieuLabel.Content = "Đã chọn !";
             }
         }
+
+       
     }
 }
 

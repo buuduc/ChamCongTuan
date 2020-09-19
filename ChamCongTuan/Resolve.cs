@@ -18,8 +18,11 @@ namespace ChamCongTuan
         List<Person> listPerson;
         List<String> listCongTac;
         ExcelWorksheet Worksheet;
+        ExcelWorksheet Worksheet0;
+        ExcelWorksheet Worksheet1;
         ExcelPackage excel = new ExcelPackage();
-        DateTime FinalDays;
+        public DateTime FinalDays;
+        public DateTime FirstDays;
         public Resolve(List<Person> ListPerson, List<String> CongTacLst)
         {
             this.listPerson = ListPerson;
@@ -27,7 +30,8 @@ namespace ChamCongTuan
             excel.Workbook.Worksheets.Add("Công Hành Chính");
             excel.Workbook.Worksheets.Add("Công tăng ca");
 
-            Worksheet = excel.Workbook.Worksheets[0];
+            this.Worksheet0 = excel.Workbook.Worksheets[0];
+            this.Worksheet1 = excel.Workbook.Worksheets[1];
         }
 
         public void CreateNewFile(string @path)
@@ -41,14 +45,31 @@ namespace ChamCongTuan
         public void Process()
         {
             FinalDays = new DateTime(2020, 8, 31);
+
+            Worksheet = Worksheet0;
             int i = 1;
             HeaderRow(i++);
             foreach (Person ps in listPerson)
             {
-                RowData(i++, ps);
+                RowData(i++, ps,ps.PubSalaryHours);
             }
             var range = Worksheet.Dimension;
             var FirstTableRange = Worksheet.Cells[Worksheet.Dimension.ToString()];
+            FirstTableRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+            FirstTableRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+            FirstTableRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            FirstTableRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+
+            Worksheet = Worksheet1;
+            i = 1;
+            HeaderRow(i++);
+            foreach (Person ps in listPerson)
+            {
+                RowData(i++, ps, ps.OverSalaryHours);
+            }
+            range = Worksheet.Dimension;
+            FirstTableRange = Worksheet.Cells[Worksheet.Dimension.ToString()];
             FirstTableRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
             FirstTableRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
             FirstTableRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
@@ -69,7 +90,7 @@ namespace ChamCongTuan
             }
 
         }
-        public void RowData(int row,Person ps)
+        public void RowData(int row,Person ps, System.Collections.Hashtable list)
         {
             
             int j = 1;
@@ -105,7 +126,7 @@ namespace ChamCongTuan
                     Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Aqua);
                 }
-                Worksheet.Cells[row, j++].Value = ps.PubSalaryHours[new DateTime(2020, 8, date.Day)];
+                Worksheet.Cells[row, j++].Value = list[date];
 
             }
         
