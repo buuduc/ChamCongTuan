@@ -25,6 +25,8 @@ namespace ChamCongTuan
             this.listPerson = ListPerson;
             this.listCongTac = CongTacLst;
             excel.Workbook.Worksheets.Add("Công Hành Chính");
+            excel.Workbook.Worksheets.Add("Công tăng ca");
+
             Worksheet = excel.Workbook.Worksheets[0];
         }
 
