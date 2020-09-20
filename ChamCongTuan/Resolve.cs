@@ -18,8 +18,8 @@ namespace ChamCongTuan
         List<Person> listPerson;
         List<String> listCongTac;
         ExcelWorksheet Worksheet;
-        ExcelWorksheet Worksheet0;
-        ExcelWorksheet Worksheet1;
+        public ExcelWorksheet Worksheet0;
+        public ExcelWorksheet Worksheet1;
         ExcelPackage excel = new ExcelPackage();
         public DateTime FinalDays;
         public DateTime FirstDays;
@@ -28,7 +28,7 @@ namespace ChamCongTuan
             this.listPerson = ListPerson;
             this.listCongTac = CongTacLst;
             excel.Workbook.Worksheets.Add("Công Hành Chính");
-            excel.Workbook.Worksheets.Add("Công tăng ca");
+            excel.Workbook.Worksheets.Add("Công Tăng Ca");
 
             this.Worksheet0 = excel.Workbook.Worksheets[0];
             this.Worksheet1 = excel.Workbook.Worksheets[1];
@@ -156,8 +156,12 @@ namespace ChamCongTuan
                 Worksheet.Cells[row, j++].Value = strday;
 
             }
-            Worksheet.Cells[row, j].Value = "Tổng công";
-
+            Worksheet.Cells[row, j].Value = "Tổng công \n (Giờ)";
+            Worksheet.Cells[row, j].Style.WrapText = true;
+            Worksheet.Cells[row, j].Style.Font.Bold =true;
+            Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            Worksheet.Column(j).Width = 10;
+            Worksheet.Column(j).Style.Font.Bold = true;
 
         }
     }

@@ -38,6 +38,9 @@
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>download1_Cgx_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPPlus, Version=5.3.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.5.3.1\lib\net45\EPPlus.dll</HintPath>
@@ -108,7 +111,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UKHGbfiLGd4Clj5o5f2u.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="download1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="download1_Cgx_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChamCongTuan"
         mc:Ignorable="d"
-        Title="Chấm Công Tuần Doctor House Group" Height="450" Width="800">
+        Title="Chấm Công Doctor House Group" Height="450" Width="800">
     <Grid Margin="0,0,-23,-31">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="114*"/>
-            <ColumnDefinition Width="328*"/>
-            <ColumnDefinition Width="133*"/>
-            <ColumnDefinition Width="217*"/>
+            <ColumnDefinition Width="117*"/>
+            <ColumnDefinition Width="475*"/>
+            <ColumnDefinition Width="223*"/>
         </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="3" Margin="26,301,49,88" Source="download1.jpg" Stretch="Fill"/>
 
         <Rectangle Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="97" Margin="89,307,0,0" Stroke="Black" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
@@ -26,8 +27,7 @@
             </Rectangle.RenderTransform>
         </Rectangle>
 
-        <DataGrid x:Name="Datagrid" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="782" Grid.ColumnSpan="5"/>
-        <Button Content="Xuất" Grid.Column="4" HorizontalAlignment="Left" Margin="22,316,0,0" VerticalAlignment="Top" Width="112" Click="ExportDataBtn" Height="33"/>
+        <DataGrid x:Name="Datagrid" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="782" Grid.ColumnSpan="4"/>
         <Rectangle Grid.Column="1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="97" Margin="14,308,0,0" Stroke="Black" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
@@ -44,7 +44,7 @@
         <Button Content="Browse" HorizontalAlignment="Left" Margin="102,363,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="NhapDuLieuBrowseBtn"/>
         <Label x:Name="NhapHoSoLabel" Grid.ColumnSpan="3" Content="Chọn file " HorizontalAlignment="Left" Height="31"  Margin="112,359,0,0" VerticalAlignment="Top" Width="64" Foreground="#FFE40E0E" FontWeight="Bold"/>
         <Label x:Name="NhapDuLieuLabel" Content="Chọn file " HorizontalAlignment="Left" Height="31"  Margin="177,359,0,0" VerticalAlignment="Top" Width="64" Foreground="#FFE40E0E" FontWeight="Bold" Grid.Column="2"/>
-        <Rectangle Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="97" Margin="282,306,0,0" Stroke="Black" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+        <Rectangle Grid.Column="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="97" Margin="282,306,0,0" Stroke="Black" VerticalAlignment="Top" Width="177" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -54,12 +54,13 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <ComboBox x:Name="FirstDayBox" Grid.Column="3" HorizontalAlignment="Left" Margin="0,316,0,0" VerticalAlignment="Top" Width="104"/>
-        <ComboBox x:Name="LastDayBox" Grid.Column="3" HorizontalAlignment="Left" Margin="0,343,0,0" VerticalAlignment="Top" Width="104"/>
-        <TextBox x:Name="Yearbox" Grid.Column="3" HorizontalAlignment="Left" Height="26" Margin="0,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" />
+        <ComboBox x:Name="FirstDayBox" Grid.Column="2" HorizontalAlignment="Left" Margin="338,316,0,0" VerticalAlignment="Top" Width="104"/>
+        <ComboBox x:Name="LastDayBox" Grid.Column="2" HorizontalAlignment="Left" Margin="338,343,0,0" VerticalAlignment="Top" Width="104"/>
+        <TextBox x:Name="Yearbox" Grid.Column="2" HorizontalAlignment="Left" Height="26" Margin="338,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" />
         <Label Content="Từ :" Grid.Column="2" HorizontalAlignment="Left" Margin="291,316,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.497" Width="37" FontWeight="Bold"/>
         <Label Content="Đến :" Grid.Column="2" HorizontalAlignment="Left" Margin="291,345,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.497" Width="37" FontWeight="Bold"/>
         <Label Content="Năm :" Grid.Column="2" HorizontalAlignment="Left" Margin="291,372,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.497" Width="37" FontWeight="Bold"/>
+        <Button Content="Export !" Grid.Column="3" HorizontalAlignment="Left" Margin="35,359,0,0" VerticalAlignment="Top" Width="133" Click="ExportDataBtn" Height="40" FontSize="20" FontWeight="Bold" Background="#FFB7DDFD"/>
 
     </Grid>
 </Window>

@@ -98,7 +98,6 @@ namespace ChamCongTuan
             try
             {
                NhapDuLieuCommand();
-                MessageBox.Show("Nhập dữ liệu thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ee)
             {
@@ -150,6 +149,8 @@ namespace ChamCongTuan
             FirstDayBox.ItemsSource = listDay;
             LastDayBox.ItemsSource = listDay;
             Yearbox.Text = DateTime.Now.Year.ToString();
+            MessageBox.Show("Nhập dữ liệu thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
 
@@ -159,7 +160,6 @@ namespace ChamCongTuan
             try
             {
                 ExportDataCommand();
-                MessageBox.Show("Xuất file thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ee)
             {
@@ -173,7 +173,17 @@ namespace ChamCongTuan
             tt.FirstDays= new DateTime(Int32.Parse(Yearbox.Text.ToString()), Int32.Parse(FirstDayBox.Text.ToString().Substring(3, 2)), Int32.Parse(FirstDayBox.Text.ToString().Substring(0, 2)));
             tt.FinalDays = new DateTime(Int32.Parse(Yearbox.Text.ToString()), Int32.Parse(LastDayBox.Text.ToString().Substring(3, 2)), Int32.Parse(LastDayBox.Text.ToString().Substring(0, 2)));
             tt.Process();
-            tt.CreateNewFile(@"E:\OneDrive - poxz\User\ADMIN\Desktop\Tesst\test.xlsx");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.FileName =@"BCC ngày " + @FirstDayBox.Text.Substring(0,2) + " - " + @LastDayBox.Text.Substring(0, 2) + " tháng "+ LastDayBox.Text.ToString().Substring(3, 2) +" năm " + Yearbox.Text + ".xlsx";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string path = saveFileDialog.FileName;
+                tt.CreateNewFile(@path);
+                MessageBox.Show("Xuất file thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
 
         }
        
@@ -184,7 +194,7 @@ namespace ChamCongTuan
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             //openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "excel files (*.txt)|*.xlsx|All files (*.*)|*.*";
+            openFileDialog.Filter = "excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
 

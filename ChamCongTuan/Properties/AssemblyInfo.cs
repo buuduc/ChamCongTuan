@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ChamCongTuan")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("App chấm công của Doctor House Group")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Doctor House Group")]
 [assembly: AssemblyProduct("ChamCongTuan")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
