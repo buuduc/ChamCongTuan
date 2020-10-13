@@ -48,6 +48,7 @@ namespace ChamCongTuan
             Worksheet = Worksheet0;
             int i = 1;
             HeaderRow(i++);
+            i++;
             foreach (Person ps in listPerson)
             {
                 RowData(i++, ps,ps.PubSalaryHours);
@@ -63,6 +64,7 @@ namespace ChamCongTuan
             Worksheet = Worksheet1;
             i = 1;
             HeaderRow(i++);
+            i++;
             foreach (Person ps in listPerson)
             {
                 RowData(i++, ps, ps.OverSalaryHours);
@@ -94,13 +96,15 @@ namespace ChamCongTuan
             
             int j = 1;
             Worksheet.Column(j).AutoFit();
+            Worksheet.Cells[row, j++].Value = ps.PhongBan;
+            Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.MaNhanVien;
             Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.HoTen;
             Worksheet.Column(j).AutoFit();
             Worksheet.Cells[row, j++].Value = ps.NgaySinh;
             Worksheet.Column(j).AutoFit();
-            Worksheet.Cells[row, j++].Value = ps.PhongBan;
+            Worksheet.Cells[row, j++].Value = ps.MaNhanSu;
             var firstAddress = Worksheet.Cells[row, j].Address;
             for (DateTime date = FirstDays; FinalDays.CompareTo(date) >=0; date = date.AddDays(1.0))
             {
@@ -138,22 +142,39 @@ namespace ChamCongTuan
         private void HeaderRow(int row)
         {
             int j = 1;
-            Worksheet.Cells[row, j++].Value = "Mã Nhân Viên";
-            Worksheet.Cells[row, j++].Value = "Họ Tên";
-            Worksheet.Cells[row, j++].Value = "Ngày Sinh";
+            Worksheet.Cells[row, j, row + 1, j].Merge = true;
+            Worksheet.Cells[row, j].Style.VerticalAlignment= ExcelVerticalAlignment.Center;
             Worksheet.Cells[row, j++].Value = "Phòng ban";
+            Worksheet.Cells[row, j, row + 1, j].Merge = true;
+            Worksheet.Cells[row, j].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            Worksheet.Cells[row, j++].Value = "Mã Nhân Sự";
+            Worksheet.Cells[row, j, row + 1, j].Merge = true;
+            Worksheet.Cells[row, j].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            Worksheet.Cells[row, j++].Value = "Họ Tên";
+            Worksheet.Cells[row, j, row + 1, j].Merge = true;
+            Worksheet.Cells[row, j].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            Worksheet.Cells[row, j++].Value = "Ngày Sinh";
+            Worksheet.Cells[row, j, row + 1, j].Merge = true;
+            Worksheet.Cells[row, j].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            Worksheet.Cells[row, j++].Value = "Mã Nhân Sự";
+
             //var firstAddress = Worksheet.Cells[row, j++].Address;
             for (DateTime date = FirstDays; FinalDays.CompareTo(date) >= 0; date = date.AddDays(1.0))
             {
                 string strday = date.DayOfWeek.ToString()+ "\n"+ date.Day.ToString() + "/" + date.Month.ToString()+"/"+ date.Year.ToString();
                 Worksheet.Cells[row,j].Style.WrapText = true;
-                Worksheet.Column(j).Width = 11.5;
+                Worksheet.Column(j).Width = 5;
                 if (date.DayOfWeek == DayOfWeek.Sunday)
                 {
                     Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+                    Worksheet.Cells[row+1, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    Worksheet.Cells[row+1, j].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
                 }
-                Worksheet.Cells[row, j++].Value = strday;
+                string a;
+                
+                Worksheet.Cells[row, j].Value = date.Day.ToString();
+                Worksheet.Cells[row + 1, j++].Value = ConvertDayOfWeeks(date.DayOfWeek);
 
             }
             Worksheet.Cells[row, j].Value = "Tổng công \n (Giờ)";
@@ -163,6 +184,31 @@ namespace ChamCongTuan
             Worksheet.Column(j).Width = 10;
             Worksheet.Column(j).Style.Font.Bold = true;
 
+        }
+        private string ConvertDayOfWeeks(System.DayOfWeek day)
+        {
+            string a;
+            switch (day)
+            {
+                case DayOfWeek.Sunday:
+                    return "CN";           
+                case DayOfWeek.Monday:
+                    return "T2";
+                case DayOfWeek.Tuesday:
+                    return "T3";
+                case DayOfWeek.Wednesday:
+                    return "T4";
+                case DayOfWeek.Thursday:
+                    return "T5";
+                case DayOfWeek.Friday:
+                    return "T6";
+                case DayOfWeek.Saturday:
+                    return "T7";
+                   
+                default:
+                    return "";
+            }
+            
         }
     }
 }
