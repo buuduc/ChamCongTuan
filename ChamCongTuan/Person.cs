@@ -16,7 +16,7 @@ namespace ChamCongTuan
         public String PhongBan { get { return DataList["Phòng ban"] == null ? "" : DataList["Phòng ban"].ToString(); } }
         public String ViTri { get { return DataList["Vị trí"] == null ? "" : DataList["Vị trí"].ToString(); } }
         public String SDT { get { return DataList["Điện thoại"] == null ? "" : DataList["Điện thoại"].ToString(); } }
-        public String HopDong { get { return DataList["Tên hợp đồng"] == null ? "" : DataList["Tên hợp đồng"].ToString(); } }
+        public String HopDong {get {return (DataList["Tên hợp đồng"]!=null & DataList["Tên hợp đồng"].ToString().IndexOf("thử việc") !=-1) ? "TV" : "CT"; } }
         public String MaNhanSu { get; set; }
         public void TinhCong()
         {
