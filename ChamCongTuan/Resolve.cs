@@ -124,6 +124,7 @@ namespace ChamCongTuan
                 {
                     Worksheet.Cells[row, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Red);
+                    Worksheet.Cells[row, j].Value = "KL";
                 }
                 else if (ps.CheckChamCong[date].ToString() == "Ô" || ps.CheckChamCong[date].ToString() == "P" || ps.CheckChamCong[date].ToString() == "P/2" || ps.CheckChamCong[date].ToString() == "Ô/2")
                 {
@@ -131,13 +132,36 @@ namespace ChamCongTuan
                     Worksheet.Cells[row, j].Style.Fill.BackgroundColor.SetColor(Color.Aqua);
                 }
                 Worksheet.Cells[row, j++].Value = list[date];
-
+                
             }
             var lastAddress = Worksheet.Cells[row, j-1].Address;
-            Worksheet.Cells[row, j].Formula="SUM("+ firstAddress+":"+lastAddress+")";
-
-
-
+            Worksheet.Cells[row, j].Value = ps.HopDong;
+            string HopDong = Worksheet.Cells[row, j].Address;
+            // Ngày làm việc
+            Worksheet.Cells[row, ++j].Formula="SUM("+ firstAddress+":"+lastAddress+")";
+            string ngaylamviec = Worksheet.Cells[row, j].Address;
+            //ngày nghỉ phép
+            Worksheet.Cells[row, ++j].Formula =
+                $"IF({HopDong} = \"CT\", COUNTIF({firstAddress}:{lastAddress}, \"P\")+SUMIF({firstAddress}:{lastAddress},0.5),0)";
+            string ngaynghiphep = Worksheet.Cells[row, j].Address;
+            //ngày nghỉ không lương
+            Worksheet.Cells[row, ++j].Formula =
+                $"IF(OR({HopDong} = \"TV\", {HopDong} = \"TT\"), COUNTIF({firstAddress}: {lastAddress}, \"KL\") + SUMIF({firstAddress}: {lastAddress}, 0.5), COUNTIF({firstAddress}: {lastAddress}, \"KL\"))";
+            string ngaynghikhongluong = Worksheet.Cells[row, j].Address;
+            //ngày nghỉ lễ
+            Worksheet.Cells[row, ++j].Formula = $"COUNTIF({firstAddress}: {lastAddress},\"L\")";
+            string ngaynghile = Worksheet.Cells[row, j].Address;
+            // ngày được tính lương
+            Worksheet.Cells[row, ++j].Formula = $" IF(OR({HopDong} = \"TT\", {HopDong} = \"TV\"), {ngaylamviec} + {ngaynghile}, {ngaylamviec} + {ngaynghiphep} + {ngaynghile})";
+            string ngayduoctinhluong = Worksheet.Cells[row, j].Address;
+            // ngày phep tinh den thang nay
+            ++j;
+            string ngaypheptinhdenthangnay = Worksheet.Cells[row, j].Address;
+            // Ngày phép còn lại 
+            Worksheet.Cells[row, ++j].Formula = $"{ngaynghiphep}-{ngaypheptinhdenthangnay}";
+            string ngayphepconlai = Worksheet.Cells[row, j].Address;
+            // Ngày tính lương thực tế
+            Worksheet.Cells[row, ++j].Formula = $" IF({ngayphepconlai} < 0, {ngayduoctinhluong} - {ngaynghiphep} + {ngaypheptinhdenthangnay}, {ngayduoctinhluong})";
         }
         private void HeaderRow(int row)
         {
@@ -177,12 +201,89 @@ namespace ChamCongTuan
                 Worksheet.Cells[row + 1, j++].Value = ConvertDayOfWeeks(date.DayOfWeek);
 
             }
-            Worksheet.Cells[row, j].Value = "Tổng công \n (Giờ)";
-            Worksheet.Cells[row, j].Style.WrapText = true;
-            Worksheet.Cells[row, j].Style.Font.Bold =true;
-            Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            Worksheet.Column(j).Width = 10;
-            Worksheet.Column(j).Style.Font.Bold = true;
+
+            {
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Value = "Hình thức hợp đồng";
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày làm việc";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold =true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày nghỉ phép";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày nghỉ không lương";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày nghỉ lễ";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày được tính lương";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày phép năm tính đến tháng này";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày phép còn lại";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
+            {
+                Worksheet.Cells[row, ++j].Value = "Ngày tính lương thực tế";
+                Worksheet.Cells[row, j, row + 1, j].Merge = true;
+                Worksheet.Cells[row, j].Style.WrapText = true;
+                Worksheet.Cells[row, j].Style.Font.Bold = true;
+                Worksheet.Cells[row, j].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                Worksheet.Column(j).Width = 10;
+                Worksheet.Column(j).Style.Font.Bold = true;
+            }
 
         }
         private string ConvertDayOfWeeks(System.DayOfWeek day)

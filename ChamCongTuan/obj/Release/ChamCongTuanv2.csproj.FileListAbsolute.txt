@@ -35,3 +35,41 @@ E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\R
 E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.CopyComplete
 E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.exe
 E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.pdb
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\ChamCongTuanV2.exe.config
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\ChamCongTuanV2.exe
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\ChamCongTuanV2.pdb
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\EPPlus.dll
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\EPPlus.xml
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csprojAssemblyReference.cache
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\MainWindowV2.g.cs
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\App.g.cs
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2_MarkupCompile.cache
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2_MarkupCompile.lref
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\MainWindowV2.baml
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.g.resources
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.Properties.Resources.resources
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.Resource1.resources
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.GenerateResource.cache
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.CoreCompileInputs.cache
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.CopyComplete
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.exe
+D:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.pdb
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\ChamCongTuanV2.exe.config
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\ChamCongTuanV2.exe
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\ChamCongTuanV2.pdb
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\EPPlus.dll
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Release\EPPlus.xml
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csprojAssemblyReference.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\MainWindowV2.g.cs
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\App.g.cs
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2_MarkupCompile.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2_MarkupCompile.lref
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\MainWindowV2.baml
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.g.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.Properties.Resources.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.Resource1.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.GenerateResource.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.CoreCompileInputs.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.csproj.CopyComplete
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.exe
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Release\ChamCongTuanV2.pdb

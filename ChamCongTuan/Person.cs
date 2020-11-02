@@ -92,12 +92,17 @@ namespace ChamCongTuan
                     else if (C.Value.ToString() == "Ô" | C.Value.ToString() == "P")
                     {
                         pubSalary++;
-                        PubSalaryHours.Add(date, 1);
+                        PubSalaryHours.Add(date, "P");
                     }
                     else if (C.Value.ToString() == "P/2" | C.Value.ToString() == "Ô/2")
                     {
                         pubSalary += 0.5;
                         PubSalaryHours.Add(date, 0.5);
+                    }
+                    else if (C.Value.ToString() == "x" | C.Value.ToString() == "KL")
+                    {
+                        
+                        PubSalaryHours.Add(date, "KL");
                     }
                 }
             }
@@ -110,11 +115,11 @@ namespace ChamCongTuan
             CheckChamCong.Clear();
         }
        
-        public Hashtable CheckChamCong = new Hashtable();
-        public Hashtable ChamCong = new Hashtable();
-        public Hashtable PubSalaryHours = new Hashtable();
-        public Hashtable OverSalaryHours = new Hashtable();
-        public Hashtable DataList =  new Hashtable();
+        public Hashtable CheckChamCong = new Hashtable(); // Kiểm tra xem người đó có chấm công ngày hôm đó hay không
+        public Hashtable ChamCong = new Hashtable(); // Lưu só công giờ làm ngày hôm đó của người ấy
+        public Hashtable PubSalaryHours = new Hashtable(); // cái này lưu lương tính công chính thức
+        public Hashtable OverSalaryHours = new Hashtable(); // cái này là lương tính công tăng ca
+        public Hashtable DataList =  new Hashtable(); //Thông tin cá nhân của người đó
 
     }
 }

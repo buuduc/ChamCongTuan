@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChamCongTuanV2.Properties;
 
 namespace ChamCongTuan
 {
@@ -49,12 +50,15 @@ namespace ChamCongTuan
             {
                 MessageBox.Show(ee.ToString(), "Error!",MessageBoxButton.OK,MessageBoxImage.Error);
             }
+
+      
+
         }
         private void NhapHoSoCommand()
         {
         ExcelWorksheet workSheet;
        
-            using (ExcelPackage MaNS = new ExcelPackage(new FileInfo(@"E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\MaNhanSu.xlsx")))
+            using (ExcelPackage MaNS = new ExcelPackage(new FileInfo(Settings.Default.MaNhanSuPath)))
             {
                 // lấy ra sheet đầu tiên để thao tác
                 workSheet = MaNS.Workbook.Worksheets[0];
@@ -151,7 +155,7 @@ namespace ChamCongTuan
                         }
                         index++;
                     }
-                check = false;
+                    check = false;
 
                 }
                 catch (Exception exe)

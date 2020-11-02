@@ -22,5 +22,17 @@ namespace ChamCongTuanV2.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\GitHub\\ChamCongTuanV2\\ChamCongTuan\\MaNhanSu.xlsx")]
+        public string MaNhanSuPath {
+            get {
+                return ((string)(this["MaNhanSuPath"]));
+            }
+            set {
+                this["MaNhanSuPath"] = value;
+            }
+        }
     }
 }
