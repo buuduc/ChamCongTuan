@@ -34,3 +34,22 @@ E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\D
 E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\MainWindowV2.g.cs
 E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\MainWindowV2.baml
 E:\OneDrive - poxz\User\ADMIN\Documents\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.Resource1.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Debug\ChamCongTuanV2.exe.config
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Debug\ChamCongTuanV2.exe
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Debug\ChamCongTuanV2.pdb
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Debug\EPPlus.dll
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\bin\Debug\EPPlus.xml
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.csprojAssemblyReference.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\MainWindowV2.g.cs
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\App.g.cs
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2_MarkupCompile.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2_MarkupCompile.lref
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\MainWindowV2.baml
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.g.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.Properties.Resources.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.Resource1.resources
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.csproj.GenerateResource.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.csproj.CoreCompileInputs.cache
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.csproj.CopyComplete
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.exe
+D:\GitHub\ChamCongTuanV2\ChamCongTuan\obj\Debug\ChamCongTuanV2.pdb

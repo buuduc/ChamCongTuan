@@ -175,10 +175,10 @@ namespace ChamCongTuan
 
         private void ExportDataBtn(object sender, RoutedEventArgs e)
         {
-           
+           ExportDataCommand();
             try
             {
-                ExportDataCommand();
+                
             }
             catch (Exception ee)
             {
