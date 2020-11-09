@@ -16,8 +16,39 @@ namespace ChamCongTuan
         public String PhongBan { get { return DataList["Phòng ban"] == null ? "" : DataList["Phòng ban"].ToString(); } }
         public String ViTri { get { return DataList["Vị trí"] == null ? "" : DataList["Vị trí"].ToString(); } }
         public String SDT { get { return DataList["Điện thoại"] == null ? "" : DataList["Điện thoại"].ToString(); } }
-        public String HopDong {get {return (DataList["Tên hợp đồng"]!=null & DataList["Tên hợp đồng"].ToString().IndexOf("thử việc") !=-1) ? "TV" : "CT"; } }
-        public String MaNhanSu { get; set; }
+
+        public String HopDong
+        {
+            get
+            {
+                if (DataList["Tên hợp đồng"] != null)
+                {
+                    if (DataList["Tên hợp đồng"].ToString().IndexOf("thử việc") != -1)
+                    {
+                        return "TV";
+                    }
+                }
+
+
+                return "CT";
+
+            }
+        }
+
+        private string manhansuVariable;
+        public object MaNhanSu
+        {
+            set
+            {
+                if (value == null)
+                    manhansuVariable = "";
+                else
+                {
+                    manhansuVariable = value.ToString();
+                }
+            }
+            get => manhansuVariable;
+        }
         public void TinhCong()
         {
             DeleteAll();
@@ -37,27 +68,30 @@ namespace ChamCongTuan
                 {
                     if (double.TryParse(C.Value.ToString(), out double number))
                     {
-                        double hoursTime = (number) * 10;
-                        hoursTime = (Math.Floor((hoursTime - 2) * 2) / 2);
-                        if (hoursTime >= 10)
+                        if (Double.Parse(C.Value.ToString()) > 0)
                         {
-                            
-                            overSalary += 8;
-                            OverSalaryHours.Add(date, 8);
+                            double hoursTime = (number) * 10;
+                            hoursTime = (Math.Floor((hoursTime - 2) * 2) / 2);
+                            if (hoursTime >= 10)
+                            {
+                                    
+                                overSalary += 8;
+                                OverSalaryHours.Add(date, 8);
 
+                            }
+                            else if (hoursTime > 8 & hoursTime < 10)
+                            {
+                                overSalary = hoursTime - 2;
+                                OverSalaryHours.Add(date, hoursTime - 2);
+                            }
+                            else
+                            {
+                                overSalary = hoursTime;
+                                OverSalaryHours.Add(date, hoursTime);
+                            }   
                         }
-                        else if (hoursTime > 8 & hoursTime < 10)
-                        {
-                            overSalary += hoursTime - 2;
-                            OverSalaryHours.Add(date, hoursTime - 2);
-                        }
-                        else
-                        {
-                            overSalary += hoursTime;
-                            OverSalaryHours.Add(date, hoursTime);
-                        }
+
                         
-
                     }
                 }
                 else

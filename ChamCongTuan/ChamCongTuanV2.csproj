@@ -127,8 +127,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Bang-cham-cong-[8-2020].xlsx" />
-    <None Include="HoSoNhanSu.xlsx" />
     <None Include="MaNhanSu.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

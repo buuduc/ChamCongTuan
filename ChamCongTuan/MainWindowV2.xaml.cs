@@ -40,10 +40,10 @@ namespace ChamCongTuan
         private Hashtable MaNhanSu = new Hashtable();
         private void NhapHoSoBtn(object sender, RoutedEventArgs e)
         {
-
+            NhapHoSoCommand();
             try
             {
-                NhapHoSoCommand();
+                
                 MessageBox.Show("Nhập hồ sơ thành công !", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ee)
@@ -80,32 +80,40 @@ namespace ChamCongTuan
 
             for (int i = workSheet.Dimension.Start.Row + 1; i <= workSheet.Dimension.End.Row; i++)
             {
-                try
+                // try
                 {
 
                     // biến j biểu thị cho một column trong file
                     int j = 1;
                     int headerrow = 1;
                     Person person = new Person();
-                    while (j<=workSheet.Dimension.End.Column)
-                        person.DataList.Add(workSheet.Cells[headerrow, j].Value.ToString(), workSheet.Cells[i, j++].Value.ToString());
-                    
+                    while (j <= workSheet.Dimension.End.Column)
+                    {
+                        // j++;
+                        // var header = (string)workSheet.Cells[headerrow, j].Value;
+                        // var data =(string) workSheet.Cells[i, j].Value;
+                        // if (workSheet.Cells[headerrow, j].Value != null)
+                        // {
+                        //     if (data == null)
+                        //         data = "";
+                        //     
+                        // }
+                        person.DataList.Add(workSheet.Cells[headerrow, j].Value, workSheet.Cells[i, j++].Value);
+                        
 
-                    //person.MaNhanVien = workSheet.Cells[i, j++].Value.ToString();
-                    //person.HoTen = workSheet.Cells[i, j++].Value.ToString();
-                    //CongTaclst.Add(workSheet.Cells[i, j].Value.ToString());
-                    //person.PhongBan = workSheet.Cells[i, j++].Value.ToString();
-                    //person.ViTri = workSheet.Cells[i, j++].Value.ToString();
-                    //person.NgaySinh = workSheet.Cells[i, j++].Value.ToString();
-                    //person.SDT = workSheet.Cells[i, j++].Value.ToString();
-                    //object a = person.ViTri;
-                    person.MaNhanSu = MaNhanSu[person.ViTri].ToString();
+                    }
+
+                    person.MaNhanSu =  MaNhanSu[person.ViTri];
+
+
+                  
                     ListPerson.Add(person);
+                    // person.MaNhanSu = MaNhanSu[person.ViTri].ToString();
                 }
-                catch (Exception exe)
-                {
-
-                }
+                // catch (Exception exe)
+                // {
+                //     throw;
+                // }
             }
             Datagrid.ItemsSource = ListPerson;
             CongTaclst = CongTaclst.Distinct().ToList();
